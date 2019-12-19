@@ -1,6 +1,10 @@
+//-----------------------------------------------------------//
 import React from "react";
 import axios from "axios";
 import MovieCard from "./MovieCard";
+import UpdateMovie from "./UpdateMovie";
+//-----------------------------------------------------------//
+
 export default class Movie extends React.Component {
   constructor(props) {
     super(props);
@@ -8,6 +12,8 @@ export default class Movie extends React.Component {
       movie: null
     };
   }
+
+//-----------------------------------------------------------//
 
   componentDidMount() {
     this.fetchMovie(this.props.match.params.id);
@@ -31,10 +37,14 @@ export default class Movie extends React.Component {
     addToSavedList(this.state.movie);
   };
 
+//-----------------------------------------------------------//
+
   render() {
     if (!this.state.movie) {
       return <div>Loading movie information...</div>;
     }
+
+//-----------------------------------------------------------//
 
     return (
       <div className="save-wrapper">
@@ -42,7 +52,10 @@ export default class Movie extends React.Component {
         <div className="save-button" onClick={this.saveMovie}>
           Save
         </div>
+        {/* - Add a button in the movie component that routes you to your new route with the movies's id as the URL param */}
+        <button onClick={() => this.props.history.push(`/update-movie/${this.state.movie.id}`)}>Update Movie</button>
       </div>
     );
   }
 }
+//-----------------------------------------------------------//
